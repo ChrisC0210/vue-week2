@@ -1,36 +1,38 @@
-import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+import { createApp } from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.45/vue.esm-browser.min.js';
+//Base URL: vue3-course-api.hexschool.io/
+const url = 'https://vue3-course-api.hexschool.io/v2';
 createApp({
   data(){
     return {
-      user:{
-        username: 'christinachen149@gmail.com',
-        //password: 'GnQBW6rCdc9fNwN',
-        password: 'GnQBW6rCdc9',
+      user: {
+        username: '',
+        password: '',
       },
     }
   },
   methods: {
     login() {
-      const api = 'https://vue3-course-api.hexschool.io/v2/admin/signin';
-      axios.post(api, this.user).then((response) =>{
-        const { token, expird } = response.data;
+      axios.post(`${url}/admin/signin`, this.user).then((response) => {
+        const { token, expired } = response.data;
         //add cookie token
         //setting expired time
-        document.cookie = `hexToken=${token};expird=${new Date(expird)};path=/`;
+        document.cookie = `hexToken=${token};expires=${new Date(expired)};path=/`;
+        //add header
+        axios.defaults.headers.common['Authorization'] = token;
         window.location = 'products.html';
         console.log(res.data);
       }).catch((err) => {
         alert(err.response.data.message);
       });
     },
-    check() {
-      const api = 'https://vue3-course-api.hexschool.io/v2/api/user/check';
-      axios.post(api).then((res) =>{
-        console.log(res.data);
-      }).catch((err) => {
-        alert(err.response.data.message);
-      });
-    },
+    // check() {
+    //   const api = 'https://vue3-course-api.hexschool.io/v2/api/user/check';
+    //   axios.post(api).then((res) =>{
+    //     console.log(res.data);
+    //   }).catch((err) => {
+    //     alert(err.response.data.message);
+    //   });
+    // },
   },
 }).mount('#app');
 

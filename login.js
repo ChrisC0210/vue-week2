@@ -20,36 +20,10 @@ createApp({
         //add header
         axios.defaults.headers.common['Authorization'] = token;
         window.location = 'products.html';
-        console.log(res.data);
+        //console.log(res.data);
       }).catch((err) => {
         alert(err.response.data.message);
       });
     },
-    // check() {
-    //   const api = 'https://vue3-course-api.hexschool.io/v2/api/user/check';
-    //   axios.post(api).then((res) =>{
-    //     console.log(res.data);
-    //   }).catch((err) => {
-    //     alert(err.response.data.message);
-    //   });
-    // },
   },
 }).mount('#app');
-
-
-// const config = {
-//   headers: { Authorization: token },
-// };
-// const url = "vue3-course-api.hexschool.io";
-
-// const data = {
-//   "username": "example@test.com",
-//   "password": "example"
-// }
-// axios
-//   .post('/v2/admin/signin', {}, config)
-//   .then((res) => {
-//     console.log(res.data);
-//   }).catch((error) => {
-//     console.log(error.response.data);
-//   })
